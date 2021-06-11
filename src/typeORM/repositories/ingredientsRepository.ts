@@ -2,12 +2,7 @@ import { getRepository, Repository } from 'typeorm';
 
 import Ingredient from '../entities/ingredient';
 
-interface CreateIngredientDTO {
-  name: string;
-  kcalValue: number;
-  type: string;
-  info: string;
-}
+import CreateIngredientDTO from '../../dtos/CreateIngredientDTO';
 
 class IngredientsRepository {
   private ormRepository: Repository<Ingredient>;
