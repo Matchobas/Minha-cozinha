@@ -1,4 +1,4 @@
-import { getRepository, Repository } from 'typeorm';
+import { getRepository, LessThanOrEqual, Repository } from 'typeorm';
 
 import Ingredient from '../entities/ingredient';
 
@@ -13,6 +13,14 @@ class IngredientsRepository {
 
   public async findAllIngredients(): Promise<Ingredient[]> {
     const ingredients = await this.ormRepository.find();
+
+    return ingredients;
+  }
+
+  public async findIngredientsByKcalValue(kcalValue: number): Promise<Ingredient[]> {
+    const ingredients = await this.ormRepository.find({
+      kcal_value: LessThanOrEqual(kcalValue)
+    });
 
     return ingredients;
   }
