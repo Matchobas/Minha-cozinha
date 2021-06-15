@@ -14,6 +14,10 @@ class CreateIngredientService {
     if (kcalValue <= 0) {
       throw new Error("The kcal value of an ingredient must be higher than 0");
     }
+
+    if (type === null) {
+      throw new Error("The type must be informed");
+    }
     
     const ingredient = await this.ingredientsRepository.createIngredient({
       name,
