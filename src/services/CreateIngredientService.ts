@@ -16,7 +16,7 @@ class CreateIngredientService {
     }
 
     if (type === null) {
-      throw new Error("The type must be informed");
+      throw new Error("This type must be informed to complete the task");
     }
     
     const ingredient = await this.ingredientsRepository.createIngredient({
