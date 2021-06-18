@@ -1,11 +1,11 @@
 import { Router, Request, Response } from 'express';
-import CreateIngredientService from './services/CreateIngredientService';
-import SearchIngredientsByKcalValueService from './services/SearchIngredientsByKcalValueService';
-import IngredientsRepository from './typeORM/repositories/ingredientsRepository';
+import CreateIngredientService from '../services/CreateIngredientService';
+import SearchIngredientsByKcalValueService from '../services/SearchIngredientsByKcalValueService';
+import IngredientsRepository from '../typeORM/repositories/ingredientsRepository';
 
 const routes = Router();
 
-routes.post('/ingredients', async (request: Request, response: Response): Promise<Response> => {
+routes.post('/create', async (request: Request, response: Response): Promise<Response> => {
   try {
     const { name, kcalValue, type, info } = request.body;
 
@@ -26,7 +26,19 @@ routes.post('/ingredients', async (request: Request, response: Response): Promis
   }
 });
 
-routes.get('/ingredients/search', 
+routes.get('/', async (request: Request, response: Response): Promise<Response> => {
+  try {
+    const ingredientsRepository = new IngredientsRepository();
+
+    const ingredients = await ingredientsRepository.findAllIngredients();
+
+    return response.json(ingredients);
+  } catch (err) {
+    return response.json({ Error: err.message });
+  }
+});
+
+routes.get('/search', 
   async (request: Request, response: Response): Promise<Response> => {
     try {
       const { kcalValue } = request.query;
