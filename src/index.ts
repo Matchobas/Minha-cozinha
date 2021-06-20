@@ -1,6 +1,6 @@
 import express from 'express';
 
-import routes from './routes';
+import routes from './routes/index';
 import './typeORM';
 
 const app = express();
