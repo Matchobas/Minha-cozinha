@@ -20,7 +20,7 @@ export default class CreateUser1623886010110 implements MigrationInterface {
                     },
                     {
                         name: 'personal_filters',
-                        type: 'varchar[]',
+                        type: 'varchar',
                         isNullable: true,
                     }
                 ]

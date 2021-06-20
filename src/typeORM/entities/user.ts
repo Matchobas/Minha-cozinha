@@ -8,8 +8,8 @@ class User {
   @Column()
   name: string;
 
-  @Column('simple-array')
-  personal_filters: string[];
+  @Column()
+  personal_filters: string;
 }
 
 export default User;
