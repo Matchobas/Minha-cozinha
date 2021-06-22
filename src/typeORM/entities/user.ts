@@ -10,6 +10,9 @@ class User {
 
   @Column()
   personal_filters: string;
+
+  @Column()
+  username: string;
 }
 
 export default User;

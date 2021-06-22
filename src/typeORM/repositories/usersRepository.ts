@@ -9,6 +9,12 @@ class UsersRepository {
     this.ormRepository = getRepository(User);
   }
 
+  public async findByName(name: string): Promise<User> {
+    const user = await this.ormRepository.find({
+      name: name
+    })
+  }
+
   public async createUser(name: string, personalFilters: string): Promise<User> {
     const user = this.ormRepository.create({
       name,
