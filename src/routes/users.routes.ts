@@ -20,4 +20,18 @@ usersRoutes.post('/create', async (request: Request, response: Response): Promis
   }
 });
 
+usersRoutes.get('/:username', async (request: Request, response: Response): Promise<Response> => {
+  try {
+    const { username } = request.params;
+
+    const usersRepository = new UsersRepository();
+
+    const getUser = await usersRepository.findByUsername(username);
+
+    return response.json(getUser);
+  } catch (err) {
+    return response.json({ Error: err.message });
+  }
+})
+
 export default usersRoutes;

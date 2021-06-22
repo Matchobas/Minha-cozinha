@@ -9,7 +9,13 @@ class UsersRepository {
     this.ormRepository = getRepository(User);
   }
 
-  
+  public async findByUsername(username: string): Promise<User | undefined> {
+    const user = await this.ormRepository.findOne({
+      where: { username: username }
+    });
+
+    return user;
+  }
 
   public async createUser(name: string, personalFilters: string, username: string): Promise<User> {
     const user = this.ormRepository.create({
