@@ -8,11 +8,12 @@ class CreateUserService {
     this.usersRepository = usersRepository;
   }
 
-  public async execute(name: string, personalFilters: string): Promise<User> {
+  public async execute(name: string, personalFilters: string, username: string): Promise<User> {
     
     const createdUser = await this.usersRepository.createUser(
       name,
-      personalFilters
+      personalFilters,
+      username
     );
 
     return createdUser;

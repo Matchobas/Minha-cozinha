@@ -9,16 +9,13 @@ class UsersRepository {
     this.ormRepository = getRepository(User);
   }
 
-  public async findByName(name: string): Promise<User> {
-    const user = await this.ormRepository.find({
-      name: name
-    })
-  }
+  
 
-  public async createUser(name: string, personalFilters: string): Promise<User> {
+  public async createUser(name: string, personalFilters: string, username: string): Promise<User> {
     const user = this.ormRepository.create({
       name,
       personal_filters: personalFilters,
+      username,
     })
 
     await this.ormRepository.save(user);

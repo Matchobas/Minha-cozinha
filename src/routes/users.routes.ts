@@ -6,13 +6,13 @@ const usersRoutes = Router();
 
 usersRoutes.post('/create', async (request: Request, response: Response): Promise<Response> => {
   try {
-    const { name, personalFilters } = request.body;
+    const { name, personalFilters, username } = request.body;
 
     const usersRepository = new UsersRepository();
 
     const createUserService = new CreateUserService(usersRepository);
 
-    const newUser = await createUserService.execute(name, personalFilters);
+    const newUser = await createUserService.execute(name, personalFilters, username);
 
     return response.json(newUser);
   } catch (err) {
