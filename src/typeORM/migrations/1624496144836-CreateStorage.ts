@@ -8,6 +8,13 @@ export default class CreateStorage1624496144836 implements MigrationInterface {
                 name: 'storage',
                 columns: [
                     {
+                        name: 'id',
+                        type: 'uuid',
+                        isPrimary: true,
+                        generationStrategy: 'uuid',
+                        default: 'uuid_generate_v4()',
+                    },
+                    {
                         name: 'user_id',
                         type: 'uuid',
                     },
