@@ -11,8 +11,8 @@ class CreateUserService {
   public async execute(name: string, personalFilters: string, username: string): Promise<User> {
     const sameUsername = await this.usersRepository.findByUsername(username);
 
-    if (sameUsername !== null) {
-      throw new Error("This username already exists");
+    if (sameUsername !== undefined) {
+      throw new Error("This username is already being used");
     }
 
     const createdUser = await this.usersRepository.createUser(

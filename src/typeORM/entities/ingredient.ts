@@ -20,7 +20,7 @@ class Ingredient {
   info: string;
 
   @OneToMany(() => Storage, storage => storage.ingredient)
-  public storage!: Storage[];
+  storage!: Storage[];
 }
 
 export default Ingredient;

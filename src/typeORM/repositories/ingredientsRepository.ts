@@ -11,6 +11,18 @@ class IngredientsRepository {
     this.ormRepository = getRepository(Ingredient);
   }
 
+  public async findIngredientByName(name: string): Promise<Ingredient> {
+    const ingredient = await this.ormRepository.findOne({
+      where: { name: name }
+    });
+
+    if (!ingredient) {
+      throw new Error("Ingredient doesn't exist");
+    }
+
+    return ingredient;
+  }
+
   public async findAllIngredients(): Promise<Ingredient[]> {
     const ingredients = await this.ormRepository.find();
 

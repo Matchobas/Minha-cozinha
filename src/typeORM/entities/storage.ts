@@ -1,4 +1,4 @@
-import { Entity, Column, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, ManyToOne, PrimaryGeneratedColumn, JoinColumn } from 'typeorm';
 
 import User from '../entities/user';
 import Ingredient from '../entities/ingredient';
@@ -6,22 +6,24 @@ import Ingredient from '../entities/ingredient';
 @Entity('storage')
 class Storage {
   @PrimaryGeneratedColumn('uuid')
-  public id: string;
+  id: string;
 
   @Column('uuid')
-  public user_id!: string;
+  user_id: string;
 
   @Column('uuid')
-  public ingredient_id!: string;
+  ingredient_id: string;
 
   @Column('integer')
-  public amount!: number;
+  amount: number;
 
-  @ManyToOne(() => User, user => user.storage)
-  public user!: User;
+  @ManyToOne(() => User, (user: User) => user.storage)
+  @JoinColumn({ name: 'user_id' })
+  user: User;
   
-  @ManyToOne(() => Ingredient, ingredient => ingredient.storage)
-  public ingredient!: Ingredient;
+  @ManyToOne(() => Ingredient, (ingredient: Ingredient) => ingredient.storage)
+  @JoinColumn({ name: 'ingredient_id' })
+  ingredient: Ingredient;
 }
 
 export default Storage;

@@ -17,7 +17,7 @@ class User {
   username: string;
 
   @OneToMany(() => Storage, storage => storage.user)
-  public storage!: Storage[];
+  storage: Storage[];
 }
 
 export default User;

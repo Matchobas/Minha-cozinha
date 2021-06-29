@@ -1,6 +1,11 @@
 import { Router, Request, Response } from 'express';
+
 import CreateUserService from '../services/CreateUserService';
+import AddIngredientToUserService from '../services/addIngredientToUserService';
+
 import UsersRepository from '../typeORM/repositories/usersRepository';
+import StoragesRepository from '../typeORM/repositories/storagesRepository';
+import IngredientsRepository from '../typeORM/repositories/ingredientsRepository';
 
 const usersRoutes = Router();
 
@@ -32,6 +37,28 @@ usersRoutes.get('/:username', async (request: Request, response: Response): Prom
   } catch (err) {
     return response.json({ Error: err.message });
   }
-})
+});
+
+usersRoutes.post('/add-ingredient', async (request: Request, response: Response): Promise<Response> => {
+  try {
+    const { amount } = request.query;
+
+    const storagesRepository = new StoragesRepository();
+    const ingredientsRepository = new IngredientsRepository();
+    const usersRepository = new UsersRepository();
+
+    const addIngredientToUserService = new AddIngredientToUserService(
+      storagesRepository,
+      ingredientsRepository,
+      usersRepository
+    );
+
+    const storage = await addIngredientToUserService.execute(Number(amount));
+
+    return response.json(storage);
+  } catch (err) {
+    return response.json({ Error: err.message });
+  }
+});
 
 export default usersRoutes;
