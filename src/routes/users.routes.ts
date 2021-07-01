@@ -41,19 +41,21 @@ usersRoutes.get('/:username', async (request: Request, response: Response): Prom
 
 usersRoutes.post('/add-ingredient', async (request: Request, response: Response): Promise<Response> => {
   try {
-    const { amount } = request.query;
+    const { amount, userId, ingredientName } = request.body;
 
     const storagesRepository = new StoragesRepository();
     const ingredientsRepository = new IngredientsRepository();
-    const usersRepository = new UsersRepository();
 
     const addIngredientToUserService = new AddIngredientToUserService(
       storagesRepository,
-      ingredientsRepository,
-      usersRepository
+      ingredientsRepository
     );
 
-    const storage = await addIngredientToUserService.execute(Number(amount));
+    const storage = await addIngredientToUserService.execute({
+      userId,
+      ingredientName,
+      amount
+    });
 
     return response.json(storage);
   } catch (err) {
