@@ -22,6 +22,34 @@ class StoragesRepository {
 
     return storage;
   }
+
+  public async findWithUserIdAndIngredientId(
+    userId: string,
+    ingredientId: string
+  ): Promise<Storage | null> {
+
+    const storage = await this.ormRepository.findOne({
+      where: {
+        user_id: userId,
+        ingredient_id: ingredientId
+      }
+    });
+
+    if (!storage) {
+      return null;
+    }
+  
+    return storage;
+  }
+
+  public async incrementAmountOfStorage(userId: string, ingredientId: string, amount: number): Promise<void>{
+    await this.ormRepository.createQueryBuilder()
+    .update(Storage)
+    .set({ amount: amount })
+    .where("user_id = :user_id", { user_id: userId })
+    .andWhere("ingredient_id = :ingredient_id", { ingredient_id: ingredientId })
+    .execute();
+  }
 }
 
 export default StoragesRepository;

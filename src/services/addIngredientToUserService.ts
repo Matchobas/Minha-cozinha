@@ -1,6 +1,5 @@
 import StoragesRepository from '../typeORM/repositories/storagesRepository';
 import IngredientsRepository from '../typeORM/repositories/ingredientsRepository';
-import UsersRepository from '../typeORM/repositories/usersRepository';
 
 import Storage from '../typeORM/entities/storage';
 
@@ -29,6 +28,31 @@ class AddIngredientToUserService {
 
     const ingredient = await this.ingredientsRepository.findIngredientByName(ingredientName);
     const ingredientId = ingredient.id;
+
+    const checkingStorage = await this.storagesRepository.findWithUserIdAndIngredientId(
+      userId, 
+      ingredientId
+    );
+
+    if (checkingStorage) {
+      const increasedAmount = checkingStorage.amount + amount;
+      console.log(increasedAmount);
+
+      await this.storagesRepository.incrementAmountOfStorage(
+        userId,
+        ingredientId,
+        increasedAmount
+      );
+
+      const updatedStorage = await this.storagesRepository.findWithUserIdAndIngredientId(
+        userId,
+        ingredientId
+      );
+
+      if (updatedStorage) {
+        return updatedStorage;
+      }
+    } 
 
     const storage = await this.storagesRepository.createStorage({
       userId,
