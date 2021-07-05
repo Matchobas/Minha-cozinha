@@ -3,9 +3,9 @@ import CreateIngredientService from '../services/CreateIngredientService';
 import SearchIngredientsByKcalValueService from '../services/SearchIngredientsByKcalValueService';
 import IngredientsRepository from '../typeORM/repositories/ingredientsRepository';
 
-const routes = Router();
+const ingredientsRoutes = Router();
 
-routes.post('/create', async (request: Request, response: Response): Promise<Response> => {
+ingredientsRoutes.post('/create', async (request: Request, response: Response): Promise<Response> => {
   try {
     const { name, kcalValue, type, info } = request.body;
 
@@ -26,7 +26,7 @@ routes.post('/create', async (request: Request, response: Response): Promise<Res
   }
 });
 
-routes.get('/', async (request: Request, response: Response): Promise<Response> => {
+ingredientsRoutes.get('/', async (request: Request, response: Response): Promise<Response> => {
   try {
     const ingredientsRepository = new IngredientsRepository();
 
@@ -38,7 +38,7 @@ routes.get('/', async (request: Request, response: Response): Promise<Response> 
   }
 });
 
-routes.get('/search', 
+ingredientsRoutes.get('/search', 
   async (request: Request, response: Response): Promise<Response> => {
     try {
       const { kcalValue } = request.query;
@@ -57,4 +57,4 @@ routes.get('/search',
     }
 });
 
-export default routes;
+export default ingredientsRoutes;

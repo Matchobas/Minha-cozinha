@@ -1,4 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+
+import Storage from '../entities/storage';
 
 @Entity('ingredient')
 class Ingredient {
@@ -16,6 +18,9 @@ class Ingredient {
 
   @Column()
   info: string;
+
+  @OneToMany(() => Storage, storage => storage.ingredient)
+  storage!: Storage[];
 }
 
 export default Ingredient;

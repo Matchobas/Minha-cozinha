@@ -1,4 +1,6 @@
-import { PrimaryGeneratedColumn, Column, Entity } from 'typeorm';
+import { PrimaryGeneratedColumn, Column, Entity, OneToMany } from 'typeorm';
+
+import Storage from '../entities/storage';
 
 @Entity('user')
 class User {
@@ -8,8 +10,14 @@ class User {
   @Column()
   name: string;
 
-  @Column('simple-array')
-  personal_filters: string[];
+  @Column()
+  personal_filters: string;
+
+  @Column()
+  username: string;
+
+  @OneToMany(() => Storage, storage => storage.user)
+  storage: Storage[];
 }
 
 export default User;
