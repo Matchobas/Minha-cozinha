@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 
-import Storage from '../entities/storage';
+import Storage from '../entities/Storage';
 
 @Entity('ingredient')
 class Ingredient {

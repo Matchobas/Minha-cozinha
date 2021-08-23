@@ -1,6 +1,6 @@
 import IngredientsRepository from '../typeORM/repositories/IngredientsRepository';
 
-import Ingredient from '../typeORM/entities/ingredient';
+import Ingredient from '../typeORM/entities/Ingredient';
 
 class SearchIngredientsByKcalValueService {
   private ingredientsRepository: IngredientsRepository;

@@ -1,5 +1,5 @@
 import IngredientsRepository from '../typeORM/repositories/IngredientsRepository';
-import Ingredient from '../typeORM/entities/ingredient';
+import Ingredient from '../typeORM/entities/Ingredient';
 
 import CreateIngredientDTO from '../dtos/CreateIngredientDTO';
 
@@ -11,6 +11,12 @@ class CreateIngredientService {
   }
 
   public async execute({ name, kcalValue, type, info }: CreateIngredientDTO): Promise<Ingredient>{
+    const exists = await this.ingredientsRepository.findIngredientByName(name);
+
+    if (exists && exists.name.toLowerCase === name.toLowerCase) {
+      throw new Error("This ingredient already exists");
+    }
+    
     if (kcalValue <= 0) {
       throw new Error("The kcal value of an ingredient must be higher than 0");
     }

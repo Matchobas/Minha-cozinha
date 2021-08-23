@@ -1,4 +1,4 @@
-import Ingredient from "../typeORM/entities/ingredient";
+import Ingredient from "../typeORM/entities/Ingredient";
 
 export default interface ingredientInStorage {
   ingredient: Ingredient;

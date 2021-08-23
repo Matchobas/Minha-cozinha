@@ -39,6 +39,7 @@ recipesRoutes.get('/find-recipes/:username',
   async (request: Request, response: Response): Promise<Response> => {
     try {
       const { username } = request.params;
+      const { ingredient } = request.query;
 
       const recipesRepository = new RecipesRepository;
       const storagesRepository = new StoragesRepository;
@@ -52,7 +53,10 @@ recipesRoutes.get('/find-recipes/:username',
         usersRepository
       );
 
-      const availableRecipes = await findRecipesWithStorageService.execute(username);
+      const availableRecipes = await findRecipesWithStorageService.execute(
+        username,
+        String(ingredient)
+      );
       
       return response.json(availableRecipes);
     } catch (err) {

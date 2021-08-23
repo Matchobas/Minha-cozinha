@@ -1,7 +1,7 @@
 import { Entity, Column, ManyToOne, PrimaryGeneratedColumn, JoinColumn } from 'typeorm';
 
-import User from '../entities/user';
-import Ingredient from '../entities/ingredient';
+import User from '../entities/User';
+import Ingredient from '../entities/Ingredient';
 
 @Entity('storage')
 class Storage {
