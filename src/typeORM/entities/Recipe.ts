@@ -9,6 +9,12 @@ class Recipe {
   name: string;
 
   @Column()
+  description: string;
+
+  @Column('integer')
+  time: number;
+
+  @Column()
   ingredients: string;
 }
 

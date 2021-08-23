@@ -3,9 +3,9 @@ import { Router, Request, Response, response } from 'express';
 import AddIngredientToUserService from '../services/addIngredientToUserService';
 import GetUserStorageService from '../services/GetUserStorageService';
 
-import StoragesRepository from '../typeORM/repositories/storagesRepository';
-import IngredientsRepository from '../typeORM/repositories/ingredientsRepository';
-import UsersRepository from '../typeORM/repositories/usersRepository';
+import StoragesRepository from '../typeORM/repositories/StoragesRepository';
+import IngredientsRepository from '../typeORM/repositories/IngredientsRepository';
+import UsersRepository from '../typeORM/repositories/UsersRepository';
 
 const storageRoutes = Router();
 

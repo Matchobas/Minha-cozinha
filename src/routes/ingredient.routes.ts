@@ -1,7 +1,7 @@
 import { Router, Request, Response } from 'express';
 import CreateIngredientService from '../services/CreateIngredientService';
 import SearchIngredientsByKcalValueService from '../services/SearchIngredientsByKcalValueService';
-import IngredientsRepository from '../typeORM/repositories/ingredientsRepository';
+import IngredientsRepository from '../typeORM/repositories/IngredientsRepository';
 
 const ingredientsRoutes = Router();
 

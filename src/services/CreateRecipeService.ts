@@ -1,6 +1,7 @@
 import RecipesRepository from '../typeORM/repositories/RecipesRepository';
 
 import Recipe from '../typeORM/entities/Recipe';
+import CreateRecipeDTO from '../dtos/CreateRecipeDTO';
 
 class CreateRecipeService {
   private recipesRepository: RecipesRepository;
@@ -11,13 +12,20 @@ class CreateRecipeService {
     this.recipesRepository = recipesRepository;
   }
 
-  public async execute(name: string, ingredients: string): Promise<Recipe> {
+  public async execute({
+    name,
+    description,
+    time,
+    ingredients
+  }: CreateRecipeDTO): Promise<Recipe> {
     // Checar se o nome já existe para criar a nova receita
     
-    const recipe = await this.recipesRepository.createRecipe(
+    const recipe = await this.recipesRepository.createRecipe({
       name,
+      description,
+      time,
       ingredients
-    );
+    });
 
     return recipe;
   }

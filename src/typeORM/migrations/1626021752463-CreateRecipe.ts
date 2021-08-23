@@ -20,6 +20,14 @@ export default class CreateRecipe1626021752463 implements MigrationInterface {
                         isUnique: true
                     },
                     {
+                        name: 'description',
+                        type: 'varchar',
+                    },
+                    {
+                        name: 'time',
+                        type: 'integer',
+                    },
+                    {
                         name: 'ingredients',
                         type: 'varchar'
                     }

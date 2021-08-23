@@ -1,14 +1,11 @@
 import Storage from 'typeORM/entities/storage';
 import Ingredient from '../typeORM/entities/ingredient';
 
-import StoragesRepository from '../typeORM/repositories/storagesRepository';
-import UsersRepository from '../typeORM/repositories/usersRepository';
-import IngredientsRepository from '../typeORM/repositories/ingredientsRepository';
+import StoragesRepository from '../typeORM/repositories/StoragesRepository';
+import UsersRepository from '../typeORM/repositories/UsersRepository';
+import IngredientsRepository from '../typeORM/repositories/IngredientsRepository';
 
-interface ingredientInStorage {
-  ingredient: Ingredient;
-  amount: number;
-}
+import IngredientInStorageDTO from '../dtos/IngredientInStorageDTO';
 
 class GetUserStorageService {
   private storagesRepository: StoragesRepository;
@@ -25,7 +22,7 @@ class GetUserStorageService {
     this.ingredientsRepository = ingredientsRepository;
   }
 
-  public async execute(username: string): Promise<ingredientInStorage[]> {
+  public async execute(username: string): Promise<IngredientInStorageDTO[]> {
     const loggedUser = await this.usersRepository.findByUsername(username);
 
     if(!loggedUser) {
@@ -40,8 +37,8 @@ class GetUserStorageService {
 
     const allIngredients = await this.ingredientsRepository.findAllIngredients();
 
-    const storageIngredients: ingredientInStorage[] = userStorage.map(storage => {
-      const ingredient = allIngredients.find(ingre => ingre.id = storage.ingredient_id);
+    const storageIngredients: IngredientInStorageDTO[] = userStorage.map(storage => {
+      const ingredient = allIngredients.find(ingre => ingre.id == storage.ingredient_id);
 
       if(!ingredient) {
         throw new Error("One of the ingredients does not exist");
