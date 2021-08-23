@@ -50,6 +50,14 @@ class StoragesRepository {
     .andWhere("ingredient_id = :ingredient_id", { ingredient_id: ingredientId })
     .execute();
   }
+
+  public async findAllByUserId(userId: string): Promise<Storage[]> {
+    const userStorage = await this.ormRepository.find({
+      where: { user_id: userId }
+    });
+
+    return userStorage;
+  }
 }
 
 export default StoragesRepository;

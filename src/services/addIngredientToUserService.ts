@@ -1,5 +1,5 @@
-import StoragesRepository from '../typeORM/repositories/storagesRepository';
-import IngredientsRepository from '../typeORM/repositories/ingredientsRepository';
+import StoragesRepository from '../typeORM/repositories/StoragesRepository';
+import IngredientsRepository from '../typeORM/repositories/IngredientsRepository';
 
 import Storage from '../typeORM/entities/storage';
 

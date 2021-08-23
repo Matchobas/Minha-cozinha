@@ -2,7 +2,7 @@ import { Router, Request, Response } from 'express';
 
 import CreateUserService from '../services/CreateUserService';
 
-import UsersRepository from '../typeORM/repositories/usersRepository';
+import UsersRepository from '../typeORM/repositories/UsersRepository';
 
 const usersRoutes = Router();
 

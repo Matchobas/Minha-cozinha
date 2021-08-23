@@ -1,4 +1,4 @@
-import IngredientsRepository from '../typeORM/repositories/ingredientsRepository';
+import IngredientsRepository from '../typeORM/repositories/IngredientsRepository';
 
 import Ingredient from '../typeORM/entities/ingredient';
 

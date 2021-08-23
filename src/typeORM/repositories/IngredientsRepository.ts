@@ -50,6 +50,18 @@ class IngredientsRepository {
 
       return ingredient;
   }
+
+  public async findIngredientById(id: string): Promise<Ingredient> {
+    const ingredient = await this.ormRepository.findOne({
+      where: { id: id }
+    });
+
+    if(!ingredient) {
+      throw new Error("Ingredient not finded");
+    }
+
+    return ingredient;
+  }
 }
 
 export default IngredientsRepository;
