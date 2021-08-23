@@ -1,7 +1,7 @@
 import { getRepository, Repository } from 'typeorm';
 
 import CreateStorageDTO from '../../dtos/CreateStorageDTO';
-import Storage from '../entities/storage';
+import Storage from '../entities/Storage';
 
 class StoragesRepository {
   private ormRepository: Repository<Storage>;

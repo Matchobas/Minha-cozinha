@@ -34,7 +34,7 @@ class FindRecipesWithStorageService {
     this.usersRepository = usersRepository;
   }
 
-  public async execute(username: string): Promise<RecipeScoreDTO[]>{
+  public async execute(username: string, searchIngredient: string): Promise<RecipeScoreDTO[]>{
     // To Do
     const getUserStorage = new GetUserStorageService(
       this.storagesRepository,
@@ -48,18 +48,24 @@ class FindRecipesWithStorageService {
 
     const ingredientNames = userAvailableIngredients.map(ingredient => ingredient.ingredient.name);
     
-    let mostAvailable = 0;
-    let mostAvailableIngredient = '';
+    let recipes: Recipe[] = [];
 
-    userAvailableIngredients.forEach(ingredient => {
-      if (ingredient.amount > mostAvailable) {
-        mostAvailable = ingredient.amount;
-        mostAvailableIngredient = ingredient.ingredient.name;
-      }
-    });
+    if (searchIngredient === '') {
+      let mostAvailable = 0;
+      let mostAvailableIngredient = '';
 
-    const recipes = await this.recipesRepository.findByIngredient(mostAvailableIngredient);
+      userAvailableIngredients.forEach(ingredient => {
+        if (ingredient.amount > mostAvailable) {
+          mostAvailable = ingredient.amount;
+          mostAvailableIngredient = ingredient.ingredient.name;
+        }
+      });
 
+      recipes = await this.recipesRepository.findByIngredient(mostAvailableIngredient);
+    } else {
+      recipes = await this.recipesRepository.findByIngredient(searchIngredient);
+    }
+    
     const scoredRecipes: RecipeScoreDTO[] = recipes.map(recipe => {
       const ingredients = recipe.ingredients.split('$$');
 

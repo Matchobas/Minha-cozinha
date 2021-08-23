@@ -1,5 +1,5 @@
-import UsersRepository from '../typeORM/repositories/usersRepository';
-import User from '../typeORM/entities/user';
+import UsersRepository from '../typeORM/repositories/UsersRepository';
+import User from '../typeORM/entities/User';
 
 class CreateUserService {
   private usersRepository: UsersRepository;

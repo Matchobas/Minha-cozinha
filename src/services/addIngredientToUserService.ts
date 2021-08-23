@@ -1,7 +1,7 @@
 import StoragesRepository from '../typeORM/repositories/StoragesRepository';
 import IngredientsRepository from '../typeORM/repositories/IngredientsRepository';
 
-import Storage from '../typeORM/entities/storage';
+import Storage from '../typeORM/entities/Storage';
 
 import CreateStorageDTO from '../dtos/CreateStorageDTO';
 
@@ -27,6 +27,11 @@ class AddIngredientToUserService {
     }
 
     const ingredient = await this.ingredientsRepository.findIngredientByName(ingredientName);
+
+    if (!ingredient) {
+      throw new Error("Ingredient doesn't exist");
+    }
+    
     const ingredientId = ingredient.id;
 
     const checkingStorage = await this.storagesRepository.findWithUserIdAndIngredientId(

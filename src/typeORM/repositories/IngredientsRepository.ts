@@ -1,6 +1,6 @@
 import { getRepository, LessThanOrEqual, Repository } from 'typeorm';
 
-import Ingredient from '../entities/ingredient';
+import Ingredient from '../entities/Ingredient';
 
 import CreateIngredientDTO from '../../dtos/CreateIngredientDTO';
 
@@ -11,14 +11,10 @@ class IngredientsRepository {
     this.ormRepository = getRepository(Ingredient);
   }
 
-  public async findIngredientByName(name: string): Promise<Ingredient> {
+  public async findIngredientByName(name: string): Promise<Ingredient | undefined> {
     const ingredient = await this.ormRepository.findOne({
       where: { name: name }
     });
-
-    if (!ingredient) {
-      throw new Error("Ingredient doesn't exist");
-    }
 
     return ingredient;
   }
